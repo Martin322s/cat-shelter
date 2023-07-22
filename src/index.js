@@ -10,4 +10,8 @@ app.get('/', (req, res) => {
     res.render('home');
 });
 
+app.get('/cats/add-cat', (req, res) => {
+    res.render('addCat');
+});
+
 app.listen((port), () => console.log(`Server is working at port: ${port}`));
