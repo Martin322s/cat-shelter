@@ -14,4 +14,8 @@ app.get('/cats/add-cat', (req, res) => {
     res.render('addCat');
 });
 
+app.get('/cats/add-breed', (req, res) => {
+    res.render('addBreed');
+});
+
 app.listen((port), () => console.log(`Server is working at port: ${port}`));
