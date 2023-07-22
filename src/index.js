@@ -3,13 +3,13 @@ const { initViewEngine } = require('../config/hbs');
 const app = express();
 const port = 5000;
 
-const breeds = [
-    'Bombay Cat', 
-    'American Bobtail Cat', 
-    'Bengal Cat', 
-    'British Shorthair Cat', 
-    'Unknown'
-];
+const breeds = {
+    breed: 'Bombay Cat',
+    brred: 'American Bobtail Cat',
+    breed: 'Bengal Cat',
+    breed: 'British Shorthair Cat',
+    breed: 'Unknown'
+};
 
 initViewEngine(app);
 app.use('/static', express.static('public'));
@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/cats/add-cat', (req, res) => {
-    res.render('addCat');
+    res.render('addCat', breeds);
 });
 
 app.get('/cats/add-breed', (req, res) => {
@@ -30,7 +30,6 @@ app.get('/cats/add-breed', (req, res) => {
 
 app.post('/cats/add-breed', (req, res) => {
     breeds.unshift(req.body.breed);
-    console.log(breeds);
     res.redirect('/cats/add-cat');
 });
 
