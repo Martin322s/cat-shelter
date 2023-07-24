@@ -21,7 +21,7 @@ app.get('/cats/add-cat', (req, res) => {
 });
 
 app.post('/cats/add-cat', (req, res) => {
-    cats.push({...req.body, _id: cats.length });
+    cats.push({ ...req.body, _id: cats.length });
     let jsonData = JSON.stringify(cats, '', 4);
     fs.writeFile(path.resolve('./src', 'cats.json'), jsonData, { encoding: 'utf-8' }, (err, data) => {
         if (err) {
@@ -49,7 +49,13 @@ app.post('/cats/add-breed', async (req, res) => {
 });
 
 app.get('/cats/edit/:catId', (req, res) => {
-    res.render('edit')
+    const catId = req.params.catId;
+    const cat = cats.find(cat => cat._id === Number(catId));
+    res.render('edit', { cat, breeds });
+});
+
+app.post('/cats/edit/:catId', (req, res) => {
+    
 });
 
 app.listen((port), () => console.log(`Server is working at port: ${port}`));
