@@ -55,7 +55,11 @@ app.get('/cats/edit/:catId', (req, res) => {
 });
 
 app.post('/cats/edit/:catId', (req, res) => {
-    
+    const newCat = req.body;
+
+    console.log(newCat);
+
+    res.redirect('/');
 });
 
 app.listen((port), () => console.log(`Server is working at port: ${port}`));
