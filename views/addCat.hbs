@@ -1,22 +1,16 @@
-<form action="#" method="" class="cat-form" enctype="multipart/form-data">
+<form action="/cats/add-cat" method="POST" class="cat-form">
     <h2>Add Cat</h2>
     <label for="name">Name</label>
     <input name="name" type="text" id="name">
     <label for="description">Description</label>
     <textarea name="description" id="description"></textarea>
     <label for="image">Image</label>
-    <input name="upload" type="file" id="image">
+    <input name="imageUrl" type="file" id="image">
     <label for="group">Breed</label>
     <select name="breed" id="group">
         {{#each breeds}}
-            {{!-- {{> breed}} --}}
-            <option value="{{breed}}">{{breed}}</option>
+        <option value="{{breed}}">{{breed}}</option>
         {{/each}}
-        {{!-- <option value="Bombay Cat">Bombay Cat</option>
-        <option value="American Bobtail Cat">American Bobtail Cat</option>
-        <option value="Bengal Cat">Bengal Cat</option>
-        <option value="British Shorthair Cat">British Shorthair Cat</option>
-        <option value="Unknown">Unknown</option> --}}
     </select>
     <button type="submit">Add Cat</button>
 </form>

@@ -3,6 +3,7 @@ const { initViewEngine } = require('../config/hbs');
 const app = express();
 const port = 5000;
 const breeds = require('./breeds.json');
+const cats = require('./cats.json');
 const fs = require('fs');
 const path = require('path');
 
@@ -12,11 +13,23 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.render('home', { cats });
 });
 
 app.get('/cats/add-cat', (req, res) => {
     res.render('addCat', { breeds });
+});
+
+app.post('/cats/add-cat', (req, res) => {
+    cats.unshift(req.body);
+    let jsonData = JSON.stringify(cats, '', 4);
+    fs.writeFile(path.resolve('./src', 'cats.json'), jsonData, { encoding: 'utf-8' }, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect('/');
+        }
+    });
 });
 
 app.get('/cats/add-breed', async (req, res) => {
@@ -26,7 +39,7 @@ app.get('/cats/add-breed', async (req, res) => {
 app.post('/cats/add-breed', async (req, res) => {
     breeds.unshift({ breed: req.body.breed });
     let jsonData = JSON.stringify(breeds, '', 4);
-    fs.writeFile(path.resolve('./src', 'breeds.json'), jsonData, { encoding: 'utf-8'}, (err, data) => {
+    fs.writeFile(path.resolve('./src', 'breeds.json'), jsonData, { encoding: 'utf-8' }, (err, data) => {
         if (err) {
             console.log(err);
         } else {
