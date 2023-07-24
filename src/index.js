@@ -4,6 +4,7 @@ const app = express();
 const port = 5000;
 const breeds = require('./breeds.json');
 const fs = require('fs');
+const path = require('path');
 
 initViewEngine(app);
 app.use('/static', express.static('public'));
@@ -24,8 +25,8 @@ app.get('/cats/add-breed', async (req, res) => {
 
 app.post('/cats/add-breed', async (req, res) => {
     breeds.unshift({ breed: req.body.breed });
-    let jsonData = JSON.stringify(breeds);
-    fs.writeFile('breeds.json', jsonData, { encoding: 'utf-8'}, (err, data) => {
+    let jsonData = JSON.stringify(breeds, '', 4);
+    fs.writeFile(path.resolve('./src', 'breeds.json'), jsonData, { encoding: 'utf-8'}, (err, data) => {
         if (err) {
             console.log(err);
         } else {
