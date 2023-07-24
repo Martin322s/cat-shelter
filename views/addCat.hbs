@@ -9,7 +9,8 @@
     <label for="group">Breed</label>
     <select name="breed" id="group">
         {{#each breeds}}
-            {{> breed}}
+            {{!-- {{> breed}} --}}
+            <option value="{{breed}}">{{breed}}</option>
         {{/each}}
         {{!-- <option value="Bombay Cat">Bombay Cat</option>
         <option value="American Bobtail Cat">American Bobtail Cat</option>
